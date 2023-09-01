@@ -1,6 +1,6 @@
 # Azure AAD to Databricks Account SCIM Sync
 
-End to end synchronization of the whitelisted list of AAD groups. Users, Groups, SPNs that are members of whitelisted groups are created in Databricks Account, and they are added to respective groups. Nested groups are supported.
+End to end synchronization of the whitelisted list of AAD groups into Databricks Account. **Users**, **Groups**, **SPNs** that are members of whitelisted groups are synchronized. Nested groups are supported.
 
 ## How to run
 
@@ -17,3 +17,10 @@ First terraform application, placed in `aad/` folder, does only download aad gro
 Second terraform application just goes and applies the known set of resources, without doing any AAD checks. Having the intermediate state written to the json file is a workaround for the "nasty TF bug". This application needs state to handle deletions. State is kept in blob storage defined in `providers.tf`
 
 To run all of this just run `sh sync.sh` :)
+
+## Known limitations
+
+- users, groups, or spns added via account console are not deleted by this application
+- members of groups added via account console are not deleted by this application
+
+I will be trying to resolve these two issues, but this should be lesser of a problem because access to account console group membership should be heavily restricted.
