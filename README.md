@@ -2,7 +2,7 @@
 
 End to end synchronization of the whitelisted list of AAD groups into Databricks Account. **Users**, **Groups**, **SPNs** that are members of whitelisted groups are synchronized. Nested groups are supported.
 
-![use terraform](docs/use_terraform.png.png)
+![use terraform](./docs/use_terraform.png.png)
 
 ## How to run
 
