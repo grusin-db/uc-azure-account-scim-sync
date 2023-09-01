@@ -6,7 +6,7 @@ End to end synchronization of the whitelisted list of AAD groups into Databricks
 
 ## How to run
 
-1. populate `grops_to_sync.json` with whitelisted list of groups to sync
+1. populate `groups_to_sync.json` with whitelisted list of groups to sync
 1. edit `providers.tf` and update connection details for databricks and terraform blob storage backend
 1. run `sh sync.sh`, it will do all the syncing for you
 
