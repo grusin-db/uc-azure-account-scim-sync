@@ -26,3 +26,7 @@ To run all of this just run `sh sync.sh` :)
 - members of groups added via account console are not deleted by this application
 
 I will be trying to resolve these two issues, but this should be lesser of a problem because access to account console group membership should be heavily restricted.
+
+## Credits
+
+Code in this repo is heavily based on work of Alex Ott (https://github.com/alexott/terraform-playground/tree/main/aad-dbx-sync).
