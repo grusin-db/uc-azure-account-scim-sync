@@ -16,4 +16,4 @@ First terraform application, placed in `aad/` folder, does only download aad gro
 
 Second terraform application just goes and applies the known set of resources, without doing any AAD checks. Having the intermediate state written to the json file is a workaround for the "nasty TF bug". This application needs state to handle deletions. State is kept in blob storage defined in `providers.tf`
 
-To run all of this just run `sh sync.sh` :slightly_smiling_face
+To run all of this just run `sh sync.sh` :)
