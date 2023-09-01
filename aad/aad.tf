@@ -1,6 +1,9 @@
-variable "aad_group_names" {
-  type = list(string)
-  description = "list of AAD groups names to sync"
+locals {
+  aad_group_names = jsondecode(file("${path.module}/../groups_to_sync.json"))
+}
+
+provider "azuread" {
+  # Configuration options
 }
 
 terraform {
@@ -14,23 +17,26 @@ terraform {
 
 # read group members of given groups from AzureAD every time Terraform is started
 data "azuread_group" "this" {
-  for_each     = toset(var.aad_group_names)
+  for_each     = toset(local.aad_group_names)
   display_name = each.value
 }
 
 locals {
-  all_members = toset(flatten([for group in values(data.azuread_group.this) : group.members]))
+  all_groups_members_ids = toset(flatten([for group in values(data.azuread_group.this) : group.members]))
+  groups_by_id = {
+    for name, data in data.azuread_group.this :
+    data.object_id => data
+  }
 }
-
 
 # Extract information about real users
 data "azuread_users" "users" {
   ignore_missing = true
-  object_ids     = local.all_members
+  object_ids     = local.all_groups_members_ids
 }
 
 locals {
-  all_users = {
+  users_by_id = {
     for user in data.azuread_users.users.users : user.object_id => user
   }
 }
@@ -38,23 +44,48 @@ locals {
 # Provision Service Principals
 data "azuread_service_principals" "spns" {
   ignore_missing = true
-  object_ids     = toset(setsubtract(local.all_members, data.azuread_users.users.object_ids))
+  object_ids     = toset(setsubtract(local.all_groups_members_ids, data.azuread_users.users.object_ids))
 }
 
 locals {
-  all_spns = {
+  spns_by_id = {
     for sp in data.azuread_service_principals.spns.service_principals : sp.object_id => sp
   }
 }
 
-output "aad" {
+locals {
+  valid_ids = setunion(
+    keys(local.groups_by_id), 
+    keys(local.spns_by_id),
+    keys(local.users_by_id)
+  )
+  group_members_mapping = toset(flatten([
+    for group, details in data.azuread_group.this : [
+      for member in details["members"] : {
+        aad_group_id  = details.object_id
+        aad_member_id = member
+      }
+      if contains(local.valid_ids, member)
+    ]
+  ]))
+  skipped_group_members_mapping = toset(flatten([
+    for group, details in data.azuread_group.this : [
+      for member in details["members"] : {
+        aad_group_id  = details.object_id
+        aad_member_id = member
+      }
+      if !contains(local.valid_ids, member)
+    ]
+  ]))
+}
+
+output "aad_state" {
   value = {
-    all_members_ids = local.all_members
-    all_spns_by_id = local.all_spns
-    all_users_by_id = local.all_users
-    all_groups_by_id = {
-      for name, data in data.azuread_group.this :
-      data.object_id => data
-    }
+    aad_group_names = local.aad_group_names
+    groups_by_id = local.groups_by_id
+    spns_by_id = local.spns_by_id
+    users_by_id = local.users_by_id
+    group_members_mapping = local.group_members_mapping
+    skipped_group_members_mapping = local.skipped_group_members_mapping
   }
 }

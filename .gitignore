@@ -8,6 +8,7 @@ dynamic-imports.tf
 tfplan*
 .tfplan*
 .terraform.lock.hcl
+terraform.tfvars.json
 
 # Environments
 .env
