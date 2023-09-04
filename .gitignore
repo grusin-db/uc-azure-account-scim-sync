@@ -7,8 +7,13 @@ dynamic-providers.tf
 dynamic-imports.tf
 tfplan*
 .tfplan*
+*.tfstate
+*.tfstate.*
 .terraform.lock.hcl
 terraform.tfvars.json
+
+# sync app
+.aad_state.json
 
 # Environments
 .env

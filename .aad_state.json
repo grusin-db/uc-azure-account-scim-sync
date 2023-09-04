@@ -5,15 +5,8 @@
       "object",
       {
         "aad_group_names": [
-          "tuple",
-          [
-            "string",
-            "string",
-            "string",
-            "string",
-            "string",
-            "string"
-          ]
+          "list",
+          "string"
         ],
         "group_members_mapping": [
           "set",

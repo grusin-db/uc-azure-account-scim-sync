@@ -1,5 +1,8 @@
 locals {
-  aad_group_names = jsondecode(file("${path.module}/../groups_to_sync.json"))
+  aad_group_names = distinct([
+    for g in jsondecode(file("${path.module}/../groups_to_sync.json")) :
+    lower(g)
+  ])
 }
 
 provider "azuread" {
@@ -37,7 +40,9 @@ data "azuread_users" "users" {
 
 locals {
   users_by_id = {
-    for user in data.azuread_users.users.users : user.object_id => user
+    for user in data.azuread_users.users.users : 
+    user.object_id => user
+    if length(regexall("'", user.user_principal_name)) == 0
   }
 }
 

@@ -40,10 +40,10 @@ locals {
 # jsonencode and decode is there because for each can only works on strings, and we need to pass two values
 # map(group -> member) wont work here, because there will be multiple members per each group
 resource "databricks_group_member" "this" {
-  for_each  = toset([
+  for_each  = {
     for x in local.aad_state.group_members_mapping :
-    jsonencode(x)
-  ])
-  group_id  = local.merged_data[jsondecode(each.key).aad_group_id].id
-  member_id = local.merged_data[jsondecode(each.key).aad_member_id].id
+    "${x.aad_group_id}|${x.aad_member_id}" => x
+  }
+  group_id  = local.merged_data[each.value.aad_group_id].id
+  member_id = local.merged_data[each.value.aad_member_id].id
 }
