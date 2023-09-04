@@ -23,7 +23,7 @@ resource "databricks_user" "this" {
 }
 
 # set account admins
-resource "databricks_user_role" "my_user_account_admin" {
+resource "databricks_user_role" "account_admins" {
   for_each = local.aad_state.admin_users_by_id
   user_id  = databricks_user.this[each.key].id
   role     = "account_admin"
