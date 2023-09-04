@@ -22,6 +22,13 @@ resource "databricks_user" "this" {
   force        = true
 }
 
+# set account admins
+resource "databricks_user_role" "my_user_account_admin" {
+  for_each = local.aad_state.admin_users_by_id
+  user_id  = databricks_user.this[each.key].id
+  role     = "account_admin"
+}
+
 # create service principals in databricks account console
 # indexed by AAD SPN object_id
 resource "databricks_service_principal" "this" {

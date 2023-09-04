@@ -8,6 +8,41 @@
           "list",
           "string"
         ],
+        "admin_users_by_id": [
+          "object",
+          {
+            "10b14e92-4ca6-4822-90e2-8f295b5b4fd5": [
+              "object",
+              {
+                "account_enabled": "bool",
+                "display_name": "string",
+                "mail": "string",
+                "mail_nickname": "string",
+                "object_id": "string",
+                "onpremises_immutable_id": "string",
+                "onpremises_sam_account_name": "string",
+                "onpremises_user_principal_name": "string",
+                "usage_location": "string",
+                "user_principal_name": "string"
+              }
+            ],
+            "b4d015f6-6a04-4b03-a610-d8924a0e5d12": [
+              "object",
+              {
+                "account_enabled": "bool",
+                "display_name": "string",
+                "mail": "string",
+                "mail_nickname": "string",
+                "object_id": "string",
+                "onpremises_immutable_id": "string",
+                "onpremises_sam_account_name": "string",
+                "onpremises_user_principal_name": "string",
+                "usage_location": "string",
+                "user_principal_name": "string"
+              }
+            ]
+          }
+        ],
         "group_members_mapping": [
           "set",
           [
@@ -550,6 +585,32 @@
         "uc-account-admin",
         "uc-metastore-playground-admin"
       ],
+      "admin_users_by_id": {
+        "10b14e92-4ca6-4822-90e2-8f295b5b4fd5": {
+          "account_enabled": true,
+          "display_name": "Grzegorz Rusin",
+          "mail": "grzegorz.rusin@databricks.com",
+          "mail_nickname": "grzegorz.rusin_databricks.com#EXT#",
+          "object_id": "10b14e92-4ca6-4822-90e2-8f295b5b4fd5",
+          "onpremises_immutable_id": "",
+          "onpremises_sam_account_name": "",
+          "onpremises_user_principal_name": "",
+          "usage_location": "",
+          "user_principal_name": "grzegorz.rusin_databricks.com#EXT#@gjrusingmail.onmicrosoft.com"
+        },
+        "b4d015f6-6a04-4b03-a610-d8924a0e5d12": {
+          "account_enabled": true,
+          "display_name": "Greg Rusin",
+          "mail": "",
+          "mail_nickname": "gjrusin_gmail.com#EXT#",
+          "object_id": "b4d015f6-6a04-4b03-a610-d8924a0e5d12",
+          "onpremises_immutable_id": "",
+          "onpremises_sam_account_name": "",
+          "onpremises_user_principal_name": "",
+          "usage_location": "NL",
+          "user_principal_name": "gjrusin_gmail.com#EXT#@gjrusingmail.onmicrosoft.com"
+        }
+      },
       "group_members_mapping": [
         {
           "aad_group_id": "10056c3c-b8cc-42cf-8cb9-d966b11b5319",

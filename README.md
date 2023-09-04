@@ -6,9 +6,10 @@ End to end synchronization of the whitelisted list of AAD groups into Databricks
 
 ## How to run
 
-1. populate `groups_to_sync.json` with whitelisted list of groups to sync
-1. edit `providers.tf` and update connection details for databricks and terraform blob storage backend
-1. run `sh sync.sh`, it will do all the syncing for you
+1. Populate `groups_to_sync.json` with whitelisted list of groups to sync. Contents if this file will most likely evolve as more teams are onboarded to UC.
+1. Populate `account_admin_groups.json` with list of aad groups whose members should be added as account admins, **this is very important step**, as of of now the terraform resets admins defined in account console if they are not defined externally. Contents of this file can evolve with time, but most likely this can be a
+1. Edit `providers.tf` and update connection details for databricks and terraform blob storage backend
+1. Run `sh sync.sh`, it will do all the syncing for you
 
 ## How it works
 
@@ -22,6 +23,7 @@ To run all of this just run `sh sync.sh` :)
 
 ## Known limitations
 
+- acount admins who are not defined in `account_admin_groups.json` will be removed from the account console
 - users, groups, or spns added via account console are not deleted by this application
 - members of groups added via account console are not deleted by this application
 
