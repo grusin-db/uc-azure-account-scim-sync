@@ -14,6 +14,7 @@ terraform.tfvars.json
 
 # sync app
 .aad_state.json
+sync_ea.sh
 
 # Environments
 .env
@@ -65,3 +66,5 @@ cover/
 
 # MacOS
 **/.DS_Store
+.aad_state.json
+.aad_state.json
