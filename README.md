@@ -39,7 +39,24 @@ python3 sync_aad_groups_to_ea.py \
 
 and run it, it will use groups defined in `.aad_state.json` file. 
 
-For more verbosity add `--verbose`, or `--dry-run` to just display list of changes
+See `python3 sync_aad_groups_to_ea.py --help` for list of all options:
+```
+usage: sync_aad_groups_to_ea.py [-h] --app_name APP_NAME --tenant_id TENANT_ID --spn_id SPN_ID --spn_key SPN_KEY [--json_file_name JSON_FILE_NAME]
+                                [--verbose] [--dry_run] [--only_add]
+
+options:
+  -h, --help            show this help message and exit
+  --app_name APP_NAME   Enterprise Application Name
+  --tenant_id TENANT_ID
+                        Azure Tenant Id
+  --spn_id SPN_ID       Deployment SPN Id
+  --spn_key SPN_KEY     Deployment SPN Secret Key
+  --json_file_name JSON_FILE_NAME
+                        JSON file containing all groups
+  --verbose             Verbose logs
+  --dry_run             Prints action, but does not do any changes
+  --only_add            Only adds groups to EA, never removes
+```
 
 **WARNING**: `ea_companion_mode` **flag MUST be set once and not changed when terraform has ran for first time (has a state file)**
 
