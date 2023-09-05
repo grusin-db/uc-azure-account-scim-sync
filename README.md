@@ -59,4 +59,5 @@ I will be trying to resolve these two issues, but this should be lesser of a pro
 
 ## Credits
 
-Code in this repo is heavily based on work of Alex Ott (https://github.com/alexott/terraform-playground/tree/main/aad-dbx-sync).
+- Code in this repo is heavily based on work of Alex Ott @ Databricks (https://github.com/alexott/terraform-playground/tree/main/aad-dbx-sync).
+- Code for EA sync (`sync_aad_groups_to_ea.py`) is based on work of Shasidhar Eranti @ Databricks
