@@ -24,9 +24,15 @@ terraform {
   }
 }
 
+# filter only existing groups
+data "azuread_groups" "this" {
+  display_names = local.aad_group_names
+  ignore_missing = true
+}
+
 # read group members of given groups from AzureAD every time Terraform is started
 data "azuread_group" "this" {
-  for_each     = toset(local.aad_group_names)
+  for_each     = toset(data.azuread_groups.this.display_names)
   display_name = each.value
 }
 
