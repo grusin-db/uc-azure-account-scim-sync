@@ -95,7 +95,7 @@ class EnterpriseAppClient:
 
     res.raise_for_status()
 
-  def set_assignment(self, assignment_ids):
+  def set_assignment(self, assignment_ids, dry_run=False):
     current = {
       d['principalId'] : d  
       for d in self.list_assignments()
@@ -103,15 +103,23 @@ class EnterpriseAppClient:
 
     assignment_ids = set(assignment_ids)
 
+    logger.debug(f"currently assigned in EA: {current}")
+
     # add
     for a in assignment_ids:
       if a not in current:
-        self.add_assignment(a)
+        if not dry_run:
+          self.add_assignment(a)
+        else:
+          logger.info(f"DRY RUN: add_assignment: {a}")
     
     # remove
     for a, d in current.items():
       if a not in assignment_ids:
-        self.remove_assignment(d['assignmentId'])
+        if not dry_run:
+          self.remove_assignment(d['assignmentId'])
+        else:
+          logger.info(f"DRY RUN: remove_assignment: {d}")
 
 if __name__ == "__main__":
   arg_parser = argparse.ArgumentParser()
@@ -120,7 +128,8 @@ if __name__ == "__main__":
   arg_parser.add_argument("--spn_id", help="Deployment SPN Id", required=True)
   arg_parser.add_argument("--spn_key", help="Deployment SPN Secret Key", required=True)
   arg_parser.add_argument("--json_file_name", help="JSON file containing all groups", default=".aad_state.json", required=False)
-  arg_parser.add_argument("--verbose", help="verbose logs", default=False, type=bool, required=False)
+  arg_parser.add_argument("--verbose", help="verbose logs", default=False, required=False, action='store_true')
+  arg_parser.add_argument("--dry_run", help="prints action, but does not do any changes", required=False, default=False, action='store_true')
   args = vars(arg_parser.parse_args())
 
   logging.basicConfig(
@@ -142,4 +151,4 @@ if __name__ == "__main__":
     aad_state = json.load(f)['aad_state']['value']
     groups_ids = list(aad_state['groups_by_id'])
 
-  ec.set_assignment(groups_ids)
+  ec.set_assignment(groups_ids, dry_run=args['dry_run'])

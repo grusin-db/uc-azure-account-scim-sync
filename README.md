@@ -37,7 +37,9 @@ python3 sync_aad_groups_to_ea.py \
   --spn_key "[redacted]"
 ```
 
-and run it, it will use groups defined in `.aad_state.json` file.
+and run it, it will use groups defined in `.aad_state.json` file. 
+
+For more verbosity add `--verbose`, or `--dry-run` to just display list of changes
 
 **WARNING**: `ea_companion_mode` **flag MUST be set once and not changed when terraform has ran for first time (has a state file)**
 

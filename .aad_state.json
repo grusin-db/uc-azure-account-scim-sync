@@ -228,7 +228,7 @@
                 "visibility": "string"
               }
             ],
-            "40627e71-7235-4c60-939a-488a376388ca": [
+            "5006e991-a9dc-420e-aa4c-5b085898d06f": [
               "object",
               {
                 "assignable_to_role": "bool",
@@ -360,7 +360,7 @@
                 "visibility": "string"
               }
             ],
-            "b36ac3a4-9e62-47a9-be8f-a0542c9e2bf3": [
+            "bd6f0f0c-e528-47f8-b67e-a3d299852083": [
               "object",
               {
                 "assignable_to_role": "bool",
@@ -426,7 +426,7 @@
                 "visibility": "string"
               }
             ],
-            "bd6f0f0c-e528-47f8-b67e-a3d299852083": [
+            "cb72644f-ab86-4de5-9403-f502e1bf3786": [
               "object",
               {
                 "assignable_to_role": "bool",
@@ -500,54 +500,7 @@
         ],
         "spns_by_id": [
           "object",
-          {
-            "7dcb7259-dafc-418e-89b2-807130199021": [
-              "object",
-              {
-                "account_enabled": "bool",
-                "app_role_assignment_required": "bool",
-                "application_id": "string",
-                "application_tenant_id": "string",
-                "display_name": "string",
-                "object_id": "string",
-                "preferred_single_sign_on_mode": "string",
-                "saml_metadata_url": "string",
-                "service_principal_names": [
-                  "list",
-                  "string"
-                ],
-                "sign_in_audience": "string",
-                "tags": [
-                  "list",
-                  "string"
-                ],
-                "type": "string"
-              }
-            ],
-            "f2d932eb-9af6-4d04-ae08-d8ebe16c4a08": [
-              "object",
-              {
-                "account_enabled": "bool",
-                "app_role_assignment_required": "bool",
-                "application_id": "string",
-                "application_tenant_id": "string",
-                "display_name": "string",
-                "object_id": "string",
-                "preferred_single_sign_on_mode": "string",
-                "saml_metadata_url": "string",
-                "service_principal_names": [
-                  "list",
-                  "string"
-                ],
-                "sign_in_audience": "string",
-                "tags": [
-                  "list",
-                  "string"
-                ],
-                "type": "string"
-              }
-            ]
-          }
+          {}
         ],
         "users_by_id": [
           "object",
@@ -567,37 +520,7 @@
                 "user_principal_name": "string"
               }
             ],
-            "87391122-0f22-480a-8a35-75fb2dcf3dcc": [
-              "object",
-              {
-                "account_enabled": "bool",
-                "display_name": "string",
-                "mail": "string",
-                "mail_nickname": "string",
-                "object_id": "string",
-                "onpremises_immutable_id": "string",
-                "onpremises_sam_account_name": "string",
-                "onpremises_user_principal_name": "string",
-                "usage_location": "string",
-                "user_principal_name": "string"
-              }
-            ],
             "b4d015f6-6a04-4b03-a610-d8924a0e5d12": [
-              "object",
-              {
-                "account_enabled": "bool",
-                "display_name": "string",
-                "mail": "string",
-                "mail_nickname": "string",
-                "object_id": "string",
-                "onpremises_immutable_id": "string",
-                "onpremises_sam_account_name": "string",
-                "onpremises_user_principal_name": "string",
-                "usage_location": "string",
-                "user_principal_name": "string"
-              }
-            ],
-            "d12c30f6-2e2c-4bdb-983a-5554d138ab71": [
               "object",
               {
                 "account_enabled": "bool",
@@ -674,44 +597,12 @@
           "aad_member_id": "b4d015f6-6a04-4b03-a610-d8924a0e5d12"
         },
         {
-          "aad_group_id": "40627e71-7235-4c60-939a-488a376388ca",
-          "aad_member_id": "10b14e92-4ca6-4822-90e2-8f295b5b4fd5"
-        },
-        {
-          "aad_group_id": "40627e71-7235-4c60-939a-488a376388ca",
-          "aad_member_id": "7dcb7259-dafc-418e-89b2-807130199021"
-        },
-        {
-          "aad_group_id": "40627e71-7235-4c60-939a-488a376388ca",
-          "aad_member_id": "87391122-0f22-480a-8a35-75fb2dcf3dcc"
-        },
-        {
-          "aad_group_id": "40627e71-7235-4c60-939a-488a376388ca",
-          "aad_member_id": "b36ac3a4-9e62-47a9-be8f-a0542c9e2bf3"
-        },
-        {
-          "aad_group_id": "40627e71-7235-4c60-939a-488a376388ca",
-          "aad_member_id": "f2d932eb-9af6-4d04-ae08-d8ebe16c4a08"
-        },
-        {
           "aad_group_id": "5eaca193-c313-4f53-8193-62977aa0a312",
           "aad_member_id": "10b14e92-4ca6-4822-90e2-8f295b5b4fd5"
         },
         {
           "aad_group_id": "5eaca193-c313-4f53-8193-62977aa0a312",
           "aad_member_id": "b4d015f6-6a04-4b03-a610-d8924a0e5d12"
-        },
-        {
-          "aad_group_id": "b36ac3a4-9e62-47a9-be8f-a0542c9e2bf3",
-          "aad_member_id": "10b14e92-4ca6-4822-90e2-8f295b5b4fd5"
-        },
-        {
-          "aad_group_id": "b36ac3a4-9e62-47a9-be8f-a0542c9e2bf3",
-          "aad_member_id": "b4d015f6-6a04-4b03-a610-d8924a0e5d12"
-        },
-        {
-          "aad_group_id": "b36ac3a4-9e62-47a9-be8f-a0542c9e2bf3",
-          "aad_member_id": "d12c30f6-2e2c-4bdb-983a-5554d138ab71"
         }
       ],
       "groups_by_id": {
@@ -782,7 +673,7 @@
           "types": [],
           "visibility": ""
         },
-        "40627e71-7235-4c60-939a-488a376388ca": {
+        "5006e991-a9dc-420e-aa4c-5b085898d06f": {
           "assignable_to_role": false,
           "auto_subscribe_new_members": false,
           "behaviors": [],
@@ -792,26 +683,18 @@
           "external_senders_allowed": false,
           "hide_from_address_lists": false,
           "hide_from_outlook_clients": false,
-          "id": "40627e71-7235-4c60-939a-488a376388ca",
+          "id": "5006e991-a9dc-420e-aa4c-5b085898d06f",
           "mail": "",
           "mail_enabled": false,
-          "mail_nickname": "754c69fd-7",
-          "members": [
-            "10b14e92-4ca6-4822-90e2-8f295b5b4fd5",
-            "f2d932eb-9af6-4d04-ae08-d8ebe16c4a08",
-            "b36ac3a4-9e62-47a9-be8f-a0542c9e2bf3",
-            "87391122-0f22-480a-8a35-75fb2dcf3dcc",
-            "7dcb7259-dafc-418e-89b2-807130199021"
-          ],
-          "object_id": "40627e71-7235-4c60-939a-488a376388ca",
+          "mail_nickname": "97e90873-3",
+          "members": [],
+          "object_id": "5006e991-a9dc-420e-aa4c-5b085898d06f",
           "onpremises_domain_name": "",
           "onpremises_netbios_name": "",
           "onpremises_sam_account_name": "",
           "onpremises_security_identifier": "",
           "onpremises_sync_enabled": false,
-          "owners": [
-            "d12c30f6-2e2c-4bdb-983a-5554d138ab71"
-          ],
+          "owners": [],
           "preferred_language": "",
           "provisioning_options": [],
           "proxy_addresses": [],
@@ -855,45 +738,6 @@
           "types": [],
           "visibility": ""
         },
-        "b36ac3a4-9e62-47a9-be8f-a0542c9e2bf3": {
-          "assignable_to_role": false,
-          "auto_subscribe_new_members": false,
-          "behaviors": [],
-          "description": "",
-          "display_name": "team01-admin",
-          "dynamic_membership": [],
-          "external_senders_allowed": false,
-          "hide_from_address_lists": false,
-          "hide_from_outlook_clients": false,
-          "id": "b36ac3a4-9e62-47a9-be8f-a0542c9e2bf3",
-          "mail": "",
-          "mail_enabled": false,
-          "mail_nickname": "d3b3f5d5-3",
-          "members": [
-            "b4d015f6-6a04-4b03-a610-d8924a0e5d12",
-            "10b14e92-4ca6-4822-90e2-8f295b5b4fd5",
-            "d12c30f6-2e2c-4bdb-983a-5554d138ab71"
-          ],
-          "object_id": "b36ac3a4-9e62-47a9-be8f-a0542c9e2bf3",
-          "onpremises_domain_name": "",
-          "onpremises_netbios_name": "",
-          "onpremises_sam_account_name": "",
-          "onpremises_security_identifier": "",
-          "onpremises_sync_enabled": false,
-          "owners": [
-            "b4d015f6-6a04-4b03-a610-d8924a0e5d12",
-            "10b14e92-4ca6-4822-90e2-8f295b5b4fd5",
-            "d12c30f6-2e2c-4bdb-983a-5554d138ab71"
-          ],
-          "preferred_language": "",
-          "provisioning_options": [],
-          "proxy_addresses": [],
-          "security_enabled": true,
-          "theme": "",
-          "timeouts": null,
-          "types": [],
-          "visibility": ""
-        },
         "bd6f0f0c-e528-47f8-b67e-a3d299852083": {
           "assignable_to_role": false,
           "auto_subscribe_new_members": false,
@@ -926,44 +770,41 @@
           "timeouts": null,
           "types": [],
           "visibility": ""
+        },
+        "cb72644f-ab86-4de5-9403-f502e1bf3786": {
+          "assignable_to_role": false,
+          "auto_subscribe_new_members": false,
+          "behaviors": [],
+          "description": "",
+          "display_name": "team01-admin",
+          "dynamic_membership": [],
+          "external_senders_allowed": false,
+          "hide_from_address_lists": false,
+          "hide_from_outlook_clients": false,
+          "id": "cb72644f-ab86-4de5-9403-f502e1bf3786",
+          "mail": "",
+          "mail_enabled": false,
+          "mail_nickname": "2f986caf-8",
+          "members": [],
+          "object_id": "cb72644f-ab86-4de5-9403-f502e1bf3786",
+          "onpremises_domain_name": "",
+          "onpremises_netbios_name": "",
+          "onpremises_sam_account_name": "",
+          "onpremises_security_identifier": "",
+          "onpremises_sync_enabled": false,
+          "owners": [],
+          "preferred_language": "",
+          "provisioning_options": [],
+          "proxy_addresses": [],
+          "security_enabled": true,
+          "theme": "",
+          "timeouts": null,
+          "types": [],
+          "visibility": ""
         }
       },
       "skipped_group_members_mapping": [],
-      "spns_by_id": {
-        "7dcb7259-dafc-418e-89b2-807130199021": {
-          "account_enabled": true,
-          "app_role_assignment_required": false,
-          "application_id": "1afe7be3-30dd-450d-85dc-c522e5688631",
-          "application_tenant_id": "83d7850c-d919-43de-a8dd-dd30c5353e52",
-          "display_name": "test-me",
-          "object_id": "7dcb7259-dafc-418e-89b2-807130199021",
-          "preferred_single_sign_on_mode": "",
-          "saml_metadata_url": "",
-          "service_principal_names": [],
-          "sign_in_audience": "AzureADMyOrg",
-          "tags": [
-            "HideApp",
-            "WindowsAzureActiveDirectoryIntegratedApp"
-          ],
-          "type": "Application"
-        },
-        "f2d932eb-9af6-4d04-ae08-d8ebe16c4a08": {
-          "account_enabled": true,
-          "app_role_assignment_required": true,
-          "application_id": "bab70a68-a7aa-43bc-909f-cd3fc8f38026",
-          "application_tenant_id": "83d7850c-d919-43de-a8dd-dd30c5353e52",
-          "display_name": "Azure_Databricks_SCIM_Provisioning_Connector",
-          "object_id": "f2d932eb-9af6-4d04-ae08-d8ebe16c4a08",
-          "preferred_single_sign_on_mode": "",
-          "saml_metadata_url": "",
-          "service_principal_names": [],
-          "sign_in_audience": "AzureADMyOrg",
-          "tags": [
-            "WindowsAzureActiveDirectoryIntegratedApp"
-          ],
-          "type": "Application"
-        }
-      },
+      "spns_by_id": {},
       "users_by_id": {
         "10b14e92-4ca6-4822-90e2-8f295b5b4fd5": {
           "account_enabled": true,
@@ -977,18 +818,6 @@
           "usage_location": "",
           "user_principal_name": "grzegorz.rusin_databricks.com#EXT#@gjrusingmail.onmicrosoft.com"
         },
-        "87391122-0f22-480a-8a35-75fb2dcf3dcc": {
-          "account_enabled": true,
-          "display_name": "Shasidhar EXT",
-          "mail": "shashidhar.e@gmail.com",
-          "mail_nickname": "shashidhar.e_gmail.com#EXT#",
-          "object_id": "87391122-0f22-480a-8a35-75fb2dcf3dcc",
-          "onpremises_immutable_id": "",
-          "onpremises_sam_account_name": "",
-          "onpremises_user_principal_name": "",
-          "usage_location": "",
-          "user_principal_name": "shashidhar.e_gmail.com#EXT#@gjrusingmail.onmicrosoft.com"
-        },
         "b4d015f6-6a04-4b03-a610-d8924a0e5d12": {
           "account_enabled": true,
           "display_name": "Greg Rusin",
@@ -1000,18 +829,6 @@
           "onpremises_user_principal_name": "",
           "usage_location": "NL",
           "user_principal_name": "gjrusin_gmail.com#EXT#@gjrusingmail.onmicrosoft.com"
-        },
-        "d12c30f6-2e2c-4bdb-983a-5554d138ab71": {
-          "account_enabled": true,
-          "display_name": "Shasidhar Eranti",
-          "mail": "shasidhar.eranti@databricks.com",
-          "mail_nickname": "shasidhar.eranti_databricks.com#EXT#",
-          "object_id": "d12c30f6-2e2c-4bdb-983a-5554d138ab71",
-          "onpremises_immutable_id": "",
-          "onpremises_sam_account_name": "",
-          "onpremises_user_principal_name": "",
-          "usage_location": "",
-          "user_principal_name": "shasidhar.eranti_databricks.com#EXT#@gjrusingmail.onmicrosoft.com"
         }
       }
     }
