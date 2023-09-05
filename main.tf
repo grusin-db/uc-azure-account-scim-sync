@@ -56,6 +56,7 @@ resource "databricks_group_member" "this" {
   for_each  = {
     for x in local.aad_state.group_members_mapping :
     "${x.aad_group_id}|${x.aad_member_id}" => x
+    if lookup(local.merged_data, x.aad_member_id, "") != ""
   }
   group_id  = local.merged_data[each.value.aad_group_id].id
   member_id = local.merged_data[each.value.aad_member_id].id

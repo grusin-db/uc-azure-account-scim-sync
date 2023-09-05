@@ -12,13 +12,15 @@ provider "azuread" {
   # Configuration options
 }
 
-# configure companion mode for enterprise app (EA) sync
+# TODO: configure companion mode for enterprise app (EA) sync
 # WARNING: this variables MUST be set once and not changed
 #   if ea_companion_mode changes from `false` (terraform maintains users) to `true` (terraform does not maintain users anymore)
 #   when terraform has state file, it will be seen as request to delete users from account console
 locals {
   ea_cfg = {
-    ea_companion_mode: false
+    # when set to true, EA will handle syncing users, terraform will not sync users
+    # when set to false, terraform will sync users
+    ea_companion_mode: true
     ea_application_id: "",
   }
 }

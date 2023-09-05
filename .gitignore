@@ -66,3 +66,4 @@ cover/
 # MacOS
 **/.DS_Store
 .aad_state.json
+.aad_state.json

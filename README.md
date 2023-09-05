@@ -41,9 +41,10 @@ To run all of this just run `sh sync.sh` :)
 
 ## Known limitations
 
-- acount admins who are not defined in `account_admin_groups.json` will be removed from the account console
+- acount admins who are not defined in `account_admin_groups.json` will be removed from the account console on first run when `ea_companion_mode = false` (terraform is responsbile for syncing users). [databricks provider github issue tracker](https://github.com/databricks/terraform-provider-databricks/issues/2648)
 - users, groups, or spns added via account console are not deleted by this application
 - members of groups added via account console are not deleted by this application
+- users having emails containing quote character will not be synced. [databricks provider github issue tracker](https://github.com/databricks/terraform-provider-databricks/issues/2646)
 
 I will be trying to resolve these two issues, but this should be lesser of a problem because access to account console group membership should be heavily restricted.
 

@@ -8,40 +8,80 @@
           "list",
           "string"
         ],
-        "admin_users_by_id": [
+        "account_admin_groups_by_id": [
           "object",
           {
-            "10b14e92-4ca6-4822-90e2-8f295b5b4fd5": [
+            "10056c3c-b8cc-42cf-8cb9-d966b11b5319": [
               "object",
               {
-                "account_enabled": "bool",
+                "assignable_to_role": "bool",
+                "auto_subscribe_new_members": "bool",
+                "behaviors": [
+                  "list",
+                  "string"
+                ],
+                "description": "string",
                 "display_name": "string",
+                "dynamic_membership": [
+                  "list",
+                  [
+                    "object",
+                    {
+                      "enabled": "bool",
+                      "rule": "string"
+                    }
+                  ]
+                ],
+                "external_senders_allowed": "bool",
+                "hide_from_address_lists": "bool",
+                "hide_from_outlook_clients": "bool",
+                "id": "string",
                 "mail": "string",
+                "mail_enabled": "bool",
                 "mail_nickname": "string",
+                "members": [
+                  "list",
+                  "string"
+                ],
                 "object_id": "string",
-                "onpremises_immutable_id": "string",
+                "onpremises_domain_name": "string",
+                "onpremises_netbios_name": "string",
                 "onpremises_sam_account_name": "string",
-                "onpremises_user_principal_name": "string",
-                "usage_location": "string",
-                "user_principal_name": "string"
-              }
-            ],
-            "b4d015f6-6a04-4b03-a610-d8924a0e5d12": [
-              "object",
-              {
-                "account_enabled": "bool",
-                "display_name": "string",
-                "mail": "string",
-                "mail_nickname": "string",
-                "object_id": "string",
-                "onpremises_immutable_id": "string",
-                "onpremises_sam_account_name": "string",
-                "onpremises_user_principal_name": "string",
-                "usage_location": "string",
-                "user_principal_name": "string"
+                "onpremises_security_identifier": "string",
+                "onpremises_sync_enabled": "bool",
+                "owners": [
+                  "list",
+                  "string"
+                ],
+                "preferred_language": "string",
+                "provisioning_options": [
+                  "list",
+                  "string"
+                ],
+                "proxy_addresses": [
+                  "list",
+                  "string"
+                ],
+                "security_enabled": "bool",
+                "theme": "string",
+                "timeouts": [
+                  "object",
+                  {
+                    "read": "string"
+                  }
+                ],
+                "types": [
+                  "list",
+                  "string"
+                ],
+                "visibility": "string"
               }
             ]
           }
+        ],
+        "account_admins_aad_group_names": [
+          "list",
+          "string"
         ],
         "group_members_mapping": [
           "set",
@@ -585,32 +625,45 @@
         "uc-account-admin",
         "uc-metastore-playground-admin"
       ],
-      "admin_users_by_id": {
-        "10b14e92-4ca6-4822-90e2-8f295b5b4fd5": {
-          "account_enabled": true,
-          "display_name": "Grzegorz Rusin",
-          "mail": "grzegorz.rusin@databricks.com",
-          "mail_nickname": "grzegorz.rusin_databricks.com#EXT#",
-          "object_id": "10b14e92-4ca6-4822-90e2-8f295b5b4fd5",
-          "onpremises_immutable_id": "",
-          "onpremises_sam_account_name": "",
-          "onpremises_user_principal_name": "",
-          "usage_location": "",
-          "user_principal_name": "grzegorz.rusin_databricks.com#EXT#@gjrusingmail.onmicrosoft.com"
-        },
-        "b4d015f6-6a04-4b03-a610-d8924a0e5d12": {
-          "account_enabled": true,
-          "display_name": "Greg Rusin",
+      "account_admin_groups_by_id": {
+        "10056c3c-b8cc-42cf-8cb9-d966b11b5319": {
+          "assignable_to_role": false,
+          "auto_subscribe_new_members": false,
+          "behaviors": [],
+          "description": "",
+          "display_name": "uc-account-admin",
+          "dynamic_membership": [],
+          "external_senders_allowed": false,
+          "hide_from_address_lists": false,
+          "hide_from_outlook_clients": false,
+          "id": "10056c3c-b8cc-42cf-8cb9-d966b11b5319",
           "mail": "",
-          "mail_nickname": "gjrusin_gmail.com#EXT#",
-          "object_id": "b4d015f6-6a04-4b03-a610-d8924a0e5d12",
-          "onpremises_immutable_id": "",
+          "mail_enabled": false,
+          "mail_nickname": "15d2c753-b",
+          "members": [
+            "b4d015f6-6a04-4b03-a610-d8924a0e5d12",
+            "10b14e92-4ca6-4822-90e2-8f295b5b4fd5"
+          ],
+          "object_id": "10056c3c-b8cc-42cf-8cb9-d966b11b5319",
+          "onpremises_domain_name": "",
+          "onpremises_netbios_name": "",
           "onpremises_sam_account_name": "",
-          "onpremises_user_principal_name": "",
-          "usage_location": "NL",
-          "user_principal_name": "gjrusin_gmail.com#EXT#@gjrusingmail.onmicrosoft.com"
+          "onpremises_security_identifier": "",
+          "onpremises_sync_enabled": false,
+          "owners": [],
+          "preferred_language": "",
+          "provisioning_options": [],
+          "proxy_addresses": [],
+          "security_enabled": true,
+          "theme": "",
+          "timeouts": null,
+          "types": [],
+          "visibility": ""
         }
       },
+      "account_admins_aad_group_names": [
+        "uc-account-admin"
+      ],
       "group_members_mapping": [
         {
           "aad_group_id": "10056c3c-b8cc-42cf-8cb9-d966b11b5319",
