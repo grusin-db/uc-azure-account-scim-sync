@@ -1,13 +1,14 @@
 locals {
-  aad_group_names = distinct([
-    for g in jsondecode(file("${path.module}/../groups_to_sync.json")) :
+  account_admins_aad_group_names = distinct([
+    for g in jsondecode(file("${path.module}/../cfg/account_admin_groups.json")) :
     lower(g)
   ])
 
-  account_admins_aad_group_names = distinct([
-    for g in jsondecode(file("${path.module}/../account_admin_groups.json")) :
+  aad_group_names = distinct([
+    for g in concat(jsondecode(file("${path.module}/../cfg/groups_to_sync.json")), local.account_admins_aad_group_names) :
     lower(g)
   ])
+
 }
 
 provider "azuread" {
@@ -41,6 +42,11 @@ locals {
     for name, data in data.azuread_group.this :
     data.object_id => data
   }
+  account_admin_groups_by_id = {
+    for name, data in data.azuread_group.admins :
+    data.object_id => data
+  }
+
 }
 
 # Extract information about real users
@@ -49,20 +55,9 @@ data "azuread_users" "users" {
   object_ids     = local.all_groups_members_ids
 }
 
-# Extract information about admin users
-data "azuread_users" "admins" {
-  ignore_missing = true
-  object_ids     = toset(flatten([for group in values(data.azuread_group.admins) : group.members]))
-}
-
 locals {
   users_by_id = {
     for user in data.azuread_users.users.users : 
-    user.object_id => user
-    if length(regexall("'", user.user_principal_name)) == 0
-  }
-  admin_users_by_id = {
-    for user in data.azuread_users.admins.users : 
     user.object_id => user
     if length(regexall("'", user.user_principal_name)) == 0
   }
@@ -109,10 +104,14 @@ locals {
 output "aad_state" {
   value = {
     aad_group_names = local.aad_group_names
+    account_admins_aad_group_names = local.account_admins_aad_group_names
+
     groups_by_id = local.groups_by_id
+    account_admin_groups_by_id = local.account_admin_groups_by_id
+    
     spns_by_id = local.spns_by_id
     users_by_id = local.users_by_id
-    admin_users_by_id = local.admin_users_by_id
+   
     group_members_mapping = local.group_members_mapping
     skipped_group_members_mapping = local.skipped_group_members_mapping
   }

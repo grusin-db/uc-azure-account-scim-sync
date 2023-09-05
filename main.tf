@@ -12,21 +12,27 @@ resource "databricks_group" "this" {
   force        = true
 }
 
+# setup group of account admins, there is no UI equavilent of this.
+resource "databricks_group_role" "acount_admins" {
+  for_each = local.aad_state.account_admin_groups_by_id
+  group_id = databricks_group.this[each.key].id
+  role     = "account_admin"
+  depends_on = [ databricks_group.this ]
+}
+
 # create or remove users from databricks account
 # indexes by AAD User object_id
+# when ea's companion mode is enabled, EA handles syncing of users
 resource "databricks_user" "this" {
-  for_each     = local.aad_state.users_by_id
+  for_each     = { 
+    for u, v in local.aad_state.users_by_id :
+    u => v
+    if local.ea_cfg.ea_companion_mode == false
+  }
   user_name    = lower(each.value.user_principal_name)
   display_name = each.value.display_name
   active       = each.value.account_enabled
   force        = true
-}
-
-# set account admins
-resource "databricks_user_role" "account_admins" {
-  for_each = local.aad_state.admin_users_by_id
-  user_id  = databricks_user.this[each.key].id
-  role     = "account_admin"
 }
 
 # create service principals in databricks account console
