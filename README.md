@@ -53,12 +53,13 @@ Second terraform application just goes and applies the known set of resources, w
 
 To run all of this just run `sh sync.sh` :)
 
-## Known limitations
+## Known limitations / bugs
 
-- acount admins who are not defined in `account_admin_groups.json` will be removed from the account console on first run when `ea_companion_mode = false` (terraform is responsbile for syncing users). [databricks provider github issue tracker](https://github.com/databricks/terraform-provider-databricks/issues/2648)
+- acount admins who are not defined in `cfg/account_admin_groups.json` will be removed from the account console on first run when `ea_companion_mode = false` (terraform is responsbile for syncing users). [databricks provider github issue tracker](https://github.com/databricks/terraform-provider-databricks/issues/2648)
 - users, groups, or spns added via account console are not deleted by this application
 - members of groups added via account console are not deleted by this application
 - users having emails containing quote character will not be synced. [databricks provider github issue tracker](https://github.com/databricks/terraform-provider-databricks/issues/2646)
+- groups defined in `cfg/groups_to_sync.json` must be valid AAD groups
 
 I will be trying to resolve these two issues, but this should be lesser of a problem because access to account console group membership should be heavily restricted.
 
