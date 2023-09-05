@@ -25,7 +25,10 @@ End to end synchronization of the whitelisted list of AAD groups into Databricks
 
 The application allows also running in enteprise app "companion mode", where users will be maintained by EA, but Groups and SPNs are mantained by terraform. Optionally we can set list of groups that EA syncs, so that this does not needs to be performed manually via EA UI.
 
-The syncing is handled by `sync_aad_groups_to_ea.py`, to run it create `sync_ea.sh` with contents:
+To enable "companion mode" mode set `ea_companion_mode` to `true` in `providers.tf`
+
+The syncing of groups that EA uses is handled by `sync_aad_groups_to_ea.py`, to run it create `sync_ea.sh` with contents:
+
 ```sh
 python3 sync_aad_groups_to_ea.py \
   --app_name "Azure_Databricks_SCIM_Provisioning_Connector" \
@@ -33,6 +36,8 @@ python3 sync_aad_groups_to_ea.py \
   --spn_id "bab70a68-a7aa-43bc-909f-cd3fc8f38026" \
   --spn_key "[redacted]"
 ```
+
+and run it, it will use groups defined in `.aad_state.json` file.
 
 **WARNING**: `ea_companion_mode` **flag MUST be set once and not changed when terraform has ran for first time (has a state file)**
 
