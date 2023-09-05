@@ -8,9 +8,18 @@ End to end synchronization of the whitelisted list of AAD groups into Databricks
 
 ## EA Companion mode
 
-The application allows also running in enteprise app "companion mode", where users will be maintained by EA, but Groups and SPNs are mantained by terraform. The terraform will also maintain list of groups that EA syncs, so that this does not needs to be performed manually via EA UI.
+The application allows also running in enteprise app "companion mode", where users will be maintained by EA, but Groups and SPNs are mantained by terraform. Optionally we can set list of groups that EA syncs, so that this does not needs to be performed manually via EA UI.
 
-## How to run
+The syncing is handled by `sync_aad_groups_to_ea.py`, to run it create `sync_ea.sh` with contents:
+```sh
+python3 sync_aad_groups_to_ea.py \
+  --app_name "Azure_Databricks_SCIM_Provisioning_Connector" \
+  --tenant_id "83d7850c-d919-43de-a8dd-dd30c5353e52" \
+  --spn_id "bab70a68-a7aa-43bc-909f-cd3fc8f38026" \
+  --spn_key "[redacted]"
+```
+
+## How to run syncing
 
 1. Edit `cfg/groups_to_sync.json`, set whitelisted list of groups to sync. Contents if this file will most likely evolve as more teams are onboarded to UC, new groups added to this file will be automatically picked up on next terraform run.
 
@@ -21,9 +30,9 @@ The application allows also running in enteprise app "companion mode", where use
 - update connection details for databricks account console
 - update connection details for terraform blob storage backend
 - update EA companion mode flag, when `true` terraform will not maintain users, this functionality will be performed by EA. Groups, and SPNs are always maintained disregard of value of this flag.
-- update EA application id that should be maintained with the groups to sync, if left empty, groups list maintained by EA wont be updated
 
 1. Run `sh sync.sh`, it will do all the syncing for you
+1. Optionally run `sh sync_ea.sh`, to update list of groups EA syncs
 
 **WARNING**: `ea_companion_mode` **flag MUST be set once and not changed when terraform has ran for first time (has a state file)**
 
