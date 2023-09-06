@@ -132,6 +132,7 @@ if __name__ == "__main__":
   arg_parser.add_argument("--verbose", help="Verbose logs", default=False, required=False, action='store_true')
   arg_parser.add_argument("--dry_run", help="Prints action, but does not do any changes", required=False, default=False, action='store_true')
   arg_parser.add_argument("--only_add", help="Only adds groups to EA, never removes", required=False, default=False, action='store_true')
+  arg_parser.add_argument("--json_dump_ea_principals", help="Dumps EA principals to JSON file", required=False)
   args = vars(arg_parser.parse_args())
 
   logging.basicConfig(
@@ -149,8 +150,16 @@ if __name__ == "__main__":
     ,app_name = args['app_name']
   )
 
-  with open(args['json_file_name'], 'r') as f:
-    aad_state = json.load(f)['aad_state']['value']
-    groups_ids = list(aad_state['groups_by_id'])
+  if args['json_dump_ea_principals']:
+    with open(args['json_dump_ea_principals'], 'w') as f:
+      json.dump([
+        g['principalDisplayName']
+        for g in ec.list_assignments()
+      ], f, indent=2)
 
-  ec.set_assignment(groups_ids, dry_run=args['dry_run'], only_add=args['only_add'])
+  else:
+    with open(args['json_file_name'], 'r') as f:
+      aad_state = json.load(f)['aad_state']['value']
+      groups_ids = list(aad_state['groups_by_id'])
+
+    ec.set_assignment(groups_ids, dry_run=args['dry_run'], only_add=args['only_add'])
