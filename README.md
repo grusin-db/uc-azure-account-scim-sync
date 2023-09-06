@@ -40,9 +40,10 @@ python3 sync_aad_groups_to_ea.py \
 and run it, it will use groups defined in `.aad_state.json` file. 
 
 See `python3 sync_aad_groups_to_ea.py --help` for list of all options:
-```
-usage: sync_aad_groups_to_ea.py [-h] --app_name APP_NAME --tenant_id TENANT_ID --spn_id SPN_ID --spn_key SPN_KEY [--json_file_name JSON_FILE_NAME]
-                                [--verbose] [--dry_run] [--only_add]
+
+```shell
+usage: sync_aad_groups_to_ea.py [-h] --app_name APP_NAME --tenant_id TENANT_ID --spn_id SPN_ID --spn_key SPN_KEY [--json_file_name JSON_FILE_NAME] [--verbose] [--dry_run]
+                                [--only_add] [--json_dump_ea_principals JSON_DUMP_EA_PRINCIPALS]
 
 options:
   -h, --help            show this help message and exit
@@ -56,6 +57,8 @@ options:
   --verbose             Verbose logs
   --dry_run             Prints action, but does not do any changes
   --only_add            Only adds groups to EA, never removes
+  --json_dump_ea_principals JSON_DUMP_EA_PRINCIPALS
+                        Dumps EA principals to JSON file
 ```
 
 **WARNING**: `ea_companion_mode` **flag MUST be set once and not changed when terraform has ran for first time (has a state file)**
