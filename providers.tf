@@ -20,7 +20,7 @@ locals {
   ea_cfg = {
     # when set to true, EA will handle syncing users, terraform will not sync users
     # when set to false, terraform will sync users
-    ea_companion_mode: false
+    ea_companion_mode : false
   }
 }
 

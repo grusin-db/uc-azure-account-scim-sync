@@ -16,7 +16,7 @@ provider "azuread" {
 }
 
 terraform {
-  required_providers {    
+  required_providers {
     azuread = {
       source  = "hashicorp/azuread"
       version = "2.22.0"
@@ -26,7 +26,7 @@ terraform {
 
 # filter only existing groups
 data "azuread_groups" "this" {
-  display_names = local.aad_group_names
+  display_names  = local.aad_group_names
   ignore_missing = true
 }
 
@@ -63,7 +63,7 @@ data "azuread_users" "users" {
 
 locals {
   users_by_id = {
-    for user in data.azuread_users.users.users : 
+    for user in data.azuread_users.users.users :
     user.object_id => user
     if length(regexall("'", user.user_principal_name)) == 0
   }
@@ -83,7 +83,7 @@ locals {
 
 locals {
   valid_ids = setunion(
-    keys(local.groups_by_id), 
+    keys(local.groups_by_id),
     keys(local.spns_by_id),
     keys(local.users_by_id)
   )
@@ -109,16 +109,16 @@ locals {
 
 output "aad_state" {
   value = {
-    aad_group_names = local.aad_group_names
+    aad_group_names                = local.aad_group_names
     account_admins_aad_group_names = local.account_admins_aad_group_names
 
-    groups_by_id = local.groups_by_id
+    groups_by_id               = local.groups_by_id
     account_admin_groups_by_id = local.account_admin_groups_by_id
-    
-    spns_by_id = local.spns_by_id
+
+    spns_by_id  = local.spns_by_id
     users_by_id = local.users_by_id
-   
-    group_members_mapping = local.group_members_mapping
+
+    group_members_mapping         = local.group_members_mapping
     skipped_group_members_mapping = local.skipped_group_members_mapping
   }
 }
