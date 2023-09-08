@@ -63,7 +63,7 @@ resource "databricks_service_principal" "this" {
 }
 
 locals {
-  merged_data = merge(databricks_user.this, databricks_service_principal.this, databricks_group.this)
+  merged_data = merge(databricks_user.this, databricks_service_principal.this, databricks_group.this, data.databricks_group.admins)
 }
 
 # assing users, spns and groups as members of the groups
