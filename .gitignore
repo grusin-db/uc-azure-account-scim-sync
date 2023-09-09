@@ -14,7 +14,9 @@ terraform.tfvars.json
 
 # sync app
 .aad_state.json
-sync_ea.sh
+.sync_ea.sh
+.sync_ea_pull.sh
+.sync_ea_push.sh
 
 # Environments
 .env
