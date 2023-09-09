@@ -2,48 +2,52 @@
 
 End to end synchronization of the whitelisted Azure Active Directory groups and their members into the Databricks Account.
 
-This terraform based application supports synchronisation of **Users**, **Groups**, **SPNs**. 
+This terraform based application supports synchronisation of **Users**, **Groups** and **SPNs**.
 
 Yes, that means that **nested groups are supported**!
 
-Additionally, the application can be configured to coexist with already configured Azure SCIM Sync Enterprise APP. This way you can leverage already synchronized Users and just add support for missing nested Groups and SPNs!
+Additionally, the application can be configured to coexist with already configured Azure SCIM Sync Enterprise APP. This way you can leverage already synchronized users and just add support for missing nested groups and spns!
 
 ![use terraform](./docs/use_terraform.png)
 
 ## How to run syncing
 
-a) Edit `cfg/groups_to_sync.json`, set whitelisted list of groups to sync.
+- Edit `cfg/groups_to_sync.json`, set list of groups to sync.
 
-  It is totally expected from application perspective that the list of groups will change over time, hence feel free to build this file dynamically based on your desired setup. 
+  - It is totally expected from application perspective that the list of groups will change over time, hence feel free to build this file dynamically based on your desired setup.
 
-  Next run of terraform will pickup all needed changes without need of any manuall intervention (of course when `--auto-approve` is set in `terraform apply ...`).
+  - Next run of terraform will pickup all needed changes without need of any manual intervention (of course when `--auto-approve` is set in `terraform apply ...`).
 
-b) Edit `cfg/account_admin_groups.json`, set list of aad groups whose members should be added as account admins/
+- Edit `cfg/account_admin_groups.json`, set list of aad groups whose members should be added as account admins
 
-**This is very important step**, as of now the terraform resets admins defined in account console if they are not defined in this file. 
+  - **This is very important step**, as of now the terraform resets admins defined in account console if they are not defined in this file. 
 
-**Any changes to `cfg/account_admin_groups.json` once terraform creates tfplan will lead to undesired effects, please dont do that. If you need to change the setup in any way, please delete the terraform state to start from scratch**
+  - **Any changes to `cfg/account_admin_groups.json` once terraform creates `tfplan` will lead to undesired effects, please dont do that. If you need to change the setup in any way, please delete the terraform state to start from scratch**
 
-c) Edit `providers.tf`
+- Edit `providers.tf`
+  - update connection details for databricks account console
+  - update connection details for terraform blob storage backend
+  - update EA companion mode flag:
+    - when `ea_companion_mode = true`: terraform **WILL NOT** sync users, it is expected at this point that users will be synchronized by EA.
+    - when `ea_companion_mode = false`: terraform **WILL** sync users.
 
-Only one time change of this file is required and permitted.
-
-- update connection details for databricks account console
-- update connection details for terraform blob storage backend
-- update the 
-- update EA companion mode flag:
-  - when `ea_companion_mode = true`: terraform **WILL NOT** sync Users, it is expected at this point that Users will be synchronized by EA.
-  - when `ea_companion_mode = false`: terraform **will** sync Users, it is still possible to have EA synchronizing users togetter with terraform, but you may face rare API exceptions where both tools try to modify the same User and API will throw errors due to this. Due to it's not good practice to have both tools synchronize the same set of resources.
+  - It is still valid configuration to have EA synchronizing users togetter with terraform, but it's not best practice
+    - It will put higher load on AAD and Databricks Account API.
+    - You may face rare API exceptions where both tools try to modify the same user.
+    - It takes more time, as double sync is needed.
+    - You have been warned.
   
-Groups, and SPNs are always maintained disregard of value of `ea_companion_mode` flag.
+  - Groups, and SPNs are always maintained disregard of value of `ea_companion_mode` flag.
 
-**Any changes to `providers.tf` once terraform creates tfplan will lead to undesired effects, please dont do that. If you need to change the setup in any way, please delete the terraform state to start from scratch**
+  - **Any changes to `providers.tf` once terraform creates `tfplan` will lead to undesired effects, please dont do that. If you need to change the setup in any way, please delete the terraform state to start from scratch**
 
-d) Run `sh sync.sh`, it will do all the syncing for you.
+- Run `sh sync.sh`, it will do all the syncing for you.
+  - By default `sync.sh`  **DOES NOT HAVE `--auto-approve`**. It will require to approve changes manually. 
+  Feel free to add `--auto-approve` once you are sure your setup works!
 
 ### EA Companion mode
 
-The application allows running in "EA companion mode", where users will be maintained by EA, but Groups and SPNs are mantained by terraform.
+The application allows running in "EA companion mode", where users will be maintained by EA, but groups (and nested groups of course) and spns are mantained by terraform. 
 
 To enable "EA companion mode" mode set `ea_companion_mode` to `true` in `providers.tf`
 
