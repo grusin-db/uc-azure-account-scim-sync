@@ -1,6 +1,6 @@
 # Azure AAD to Databricks Account SCIM Sync
 
-End to end synchronization of the whitelisted Azure Active Directory groups and their members into the Databricks Account.
+An example of the end to end synchronization of the whitelisted Azure Active Directory groups and their members into the Databricks Account.
 
 This terraform&python based application supports synchronisation of **Users**, **Groups** and **SPNs** that are members of the whitelisted AAD groups and groups themselves as well.
 
