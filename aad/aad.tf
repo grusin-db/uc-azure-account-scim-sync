@@ -82,27 +82,28 @@ locals {
 }
 
 locals {
-  valid_ids = setunion(
-    keys(local.groups_by_id),
-    keys(local.spns_by_id),
-    keys(local.users_by_id)
-  )
+  valid_ids = {
+    for x in setunion(keys(local.groups_by_id), keys(local.spns_by_id), keys(local.users_by_id)) :
+    x => x
+  }
+  
   group_members_mapping = toset(flatten([
     for group, details in data.azuread_group.this : [
       for member in details["members"] : {
         aad_group_id  = details.object_id
         aad_member_id = member
       }
-      if contains(local.valid_ids, member)
+      if lookup(local.valid_ids, member, "") != ""
     ]
   ]))
+  
   skipped_group_members_mapping = toset(flatten([
     for group, details in data.azuread_group.this : [
       for member in details["members"] : {
         aad_group_id  = details.object_id
         aad_member_id = member
       }
-      if !contains(local.valid_ids, member)
+      if lookup(local.valid_ids, member, "") != ""
     ]
   ]))
 }
