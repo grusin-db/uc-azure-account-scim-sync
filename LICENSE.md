@@ -1,6 +1,6 @@
 Databricks Terraform Provider CI/CD examples
 
-Copyright 2022 Databricks, Inc.  All rights reserved.
+Copyright 2023 Databricks, Inc.  All rights reserved.
 
 				Apache License
                            Version 2.0, January 2004
