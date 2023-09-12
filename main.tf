@@ -63,18 +63,22 @@ resource "databricks_service_principal" "this" {
 }
 
 locals {
-  merged_data = merge(databricks_user.this, databricks_service_principal.this, databricks_group.this, data.databricks_group.admins)
+  # make this dataset as small as possible, to make TF use less resources
+  # there seems to be CPU usage increase when `v` is a big object
+  merged_data = {
+    for k, v in merge(databricks_user.this, databricks_service_principal.this, databricks_group.this, data.databricks_group.admins) :
+    k => v.id
+  }
 }
 
-# assing users, spns and groups as members of the groups
-# jsonencode and decode is there because for each can only works on strings, and we need to pass two values
-# map(group -> member) wont work here, because there will be multiple members per each group
+# assign users, spns and groups as members of the groups
+# users are only assigned when ea_compaion_mode is false
 resource "databricks_group_member" "this" {
   for_each = {
     for x in local.aad_state.group_members_mapping :
     "${x.aad_group_id}|${x.aad_member_id}" => x
     if lookup(local.merged_data, x.aad_member_id, "") != ""
   }
-  group_id  = local.merged_data[each.value.aad_group_id].id
-  member_id = local.merged_data[each.value.aad_member_id].id
+  group_id  = local.merged_data[each.value.aad_group_id]
+  member_id = local.merged_data[each.value.aad_member_id]
 }
