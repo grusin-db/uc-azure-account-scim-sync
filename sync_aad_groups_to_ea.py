@@ -151,14 +151,14 @@ if __name__ == "__main__":
   )
 
   if args['json_dump_ea_principals']:
-    with open(args['json_dump_ea_principals'], 'w') as f:
+    with open(args['json_dump_ea_principals'], 'w', encoding='utf8') as f:
       json.dump([
         g['principalDisplayName']
         for g in ec.list_assignments()
       ], f, indent=2)
 
   else:
-    with open(args['json_file_name'], 'r') as f:
+    with open(args['json_file_name'], 'r', encoding='utf8') as f:
       aad_state = json.load(f)['aad_state']['value']
       groups_ids = list(aad_state['groups_by_id'])
 
