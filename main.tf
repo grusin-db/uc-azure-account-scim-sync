@@ -63,12 +63,7 @@ resource "databricks_service_principal" "this" {
 }
 
 locals {
-  # make this dataset as small as possible, to make TF use less resources
-  # there seems to be CPU usage increase when `v` is a big object
-  merged_data = {
-    for k, v in merge(databricks_user.this, databricks_service_principal.this, databricks_group.this, data.databricks_group.admins) :
-    k => v.id
-  }
+  merged_data = merge(databricks_user.this, databricks_service_principal.this, databricks_group.this, data.databricks_group.admins)
 }
 
 # assign users, spns and groups as members of the groups
@@ -79,6 +74,6 @@ resource "databricks_group_member" "this" {
     "${x.aad_group_id}|${x.aad_member_id}" => x
     if lookup(local.merged_data, x.aad_member_id, "") != ""
   }
-  group_id  = local.merged_data[each.value.aad_group_id]
-  member_id = local.merged_data[each.value.aad_member_id]
+  group_id  = local.merged_data[each.value.aad_group_id].id
+  member_id = local.merged_data[each.value.aad_member_id].id
 }
